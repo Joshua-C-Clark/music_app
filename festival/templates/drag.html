@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        {% for t in time %}
+            <p style="margin-bottom: 0px;">{{t}}</p>
+        {% endfor %}
+    </div>
+
+    <div class="col">
+        {% for t in times %}
+            {% for p in performer %}
+                {% if t==p.start_time %}
+                    <p style="margin-bottom: 0px; line-height: 2;">
+                        {{p.artist_name}}</p>
+                {% endif %}
+
+
+
+            {% endfor %}
+
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+{% endblock content %}

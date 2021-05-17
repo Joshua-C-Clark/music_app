@@ -1,19 +1,19 @@
+from logging import log
 import os
 import spotipy
 from festival import app, db, bcrypt
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from festival.models import User
+from festival.models import User, Performers
 from festival.forms import RegistrationForm, LoginForm
 from secrets import token_hex
-
+from operator import itemgetter
 
 REDIRECT_URI = "http://localhost:5000/"
 SCOPE = 'playlist-modify-private,playlist-modify-public,user-top-read'
 CACHE = '.spotipyoauthcache'
 CLIENT_ID=os.environ['SPOTIPY_CLIENT_ID']
 CLIENT_SECRET=os.environ['SPOTIPY_CLIENT_SECRET']
-
 
 @app.route('/')
 @app.route('/home')
@@ -84,10 +84,12 @@ def login():
 
 @app.route('/spotify_login')
 def spotify_login():
-    sp_oauth = spotipy.oauth2.SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET ,redirect_uri=REDIRECT_URI,scope=SCOPE, show_dialog=True, cache_path=CACHE+current_user.username)
-    auth_url = sp_oauth.get_authorize_url()
-    return render_template('spotify_login.html',auth_url=auth_url)
-
+    try:
+        sp_oauth = spotipy.oauth2.SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET ,redirect_uri=REDIRECT_URI,scope=SCOPE, show_dialog=True, cache_path=CACHE+current_user.username)
+        auth_url = sp_oauth.get_authorize_url()
+        return render_template('spotify_login.html',auth_url=auth_url)
+    except:
+        return redirect(url_for('home'))
 
 @app.route('/logout')
 def logout():
@@ -100,10 +102,10 @@ def favorite_artists():
     if current_user.access_token is None:
         return redirect(url_for('spotify_login'))
     sp = spotipy.Spotify(current_user.access_token)
-    favorite_artists=sp.current_user_top_artists()
+    favorite_artists=sp.current_user_top_artists(limit=50, time_range='medium_term')
     artists=[]
     for item in favorite_artists["items"]:
-        artists.append(item['name'])
+        artists.append([item['name'],item['popularity']])
     return render_template('favorite_artists.html', artists=artists, sp=sp)
 
     
@@ -113,8 +115,62 @@ def favorite_tracks():
     if current_user.access_token is None:
         return redirect(url_for('spotify_login'))
     sp = spotipy.Spotify(current_user.access_token)
-    favorite_tracks = sp.current_user_top_tracks()
+    favorite_tracks = sp.current_user_top_tracks(limit=50, time_range="medium_term")
     tracks=[]
     for item in favorite_tracks["items"]:
-        tracks.append(item['name'])
+        tracks.append([item['name'],item['popularity']])
     return render_template('favorite_tracks.html', tracks=tracks, sp=sp)
+
+
+
+
+
+
+
+@app.route('/testing')
+@login_required
+def testing():
+    if current_user.access_token is None:
+        return redirect(url_for('spotify_login'))
+    sp = spotipy.Spotify(current_user.access_token)
+    fav_artist = sp.current_user_top_artists(limit=50, time_range='medium_term')
+    sim_art_long = []
+    artists=[]
+    artist_dict={}
+    for item in fav_artist["items"]:
+        artists.append([item['name'],item['id']])
+        sim = sp.artist_related_artists(item['id'])
+        similar_artists = []
+        for artist in sim["artists"]:
+            similar_artists.append(artist['name'])
+        artist_dict[item['name']]=similar_artists
+
+    # return fav_artist
+    return render_template('testing.html', artist_dict=artist_dict)
+
+
+
+@app.route('/drag')
+def drag():
+
+    performer = Performers.query.all()
+    time=['12:00','12:30','1:00','1:30','2:00','2:30',
+        '3:00','3:30','4:00','4:30','5:00','5:30','6:00','6:30',
+        '7:00','7:30','8:00','8:30','9:00','9:30','10:00',
+        '10:30','11:00','11:30','12:00']
+
+    times=[1200,1230,1300,1330,1400,1430,1500,1530,1600,
+    1630,1700,1730,1800,1830,1900,1930,2000,2030,2100,2130,
+    2200,2230,2300,2330,2400]
+
+    print(round(((times[5]-times[3])*2)/2))
+
+
+
+    return render_template('drag.html',performer=performer, time=time, times=times) 
+
+    
+
+    
+
+

@@ -7,6 +7,20 @@ body {
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
   }
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
   
   .bg-steel {
     background-color: #5f788a;
@@ -78,3 +92,6 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+
+  

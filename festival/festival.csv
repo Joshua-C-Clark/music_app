@@ -1,0 +1,23 @@
+id,Artist Name,Start Time,Stop Time,Length,Stage Name
+1,Cool Era,1200,1230,2,Sonora
+2,Tomasaa del Real,1400,1430,2,Sonora
+3,Las Robertas,1500,1530,2,Sonora
+4,Turnstile,1545,1615,2,Sonora
+5,Rat Boy,1630,1715,2.5,Sonora
+6,Kerro Kero Bonito,1730,1815,2.5,Sonora
+7,Still Woozy,1830,1915,2.5,Sonora
+8,The Frights,1930,2015,2.5,Sonora
+9,US Girls,2030,2115,2.5,Sonora
+10,Jimbo Jenkins,1500,1545,2.5,Outdoor
+11,88Glam,1600,1645,2.5,Outdoor
+12,JPEGMAFIA,1700,1745,2.5,Outdoor
+13,Gorgon City,1815,1915,4,Outdoor
+14,Ella Mai,1945,2030,2.5,Outdoor
+15,Rufus du Sol,2045,2200,4.5,Outdoor
+16,DJ Snake,2230,2400,5,Outdoor
+17,Los Tucanes de Tijuana,1515,1600,4.5,Coachella
+18,Mon Laferte,1630,1730,4,Coachella
+19,Kacey Musgraves,1745,1845,4,Coachella
+20,The 1975,2015,2130,4.5,Coachella
+21,Janelle Monae,2145,2245,4,Coachella
+22,Childish Gambino,2315,2400,4,Coachella

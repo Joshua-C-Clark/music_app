@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for key in artist_dict %}
+        <h1>{{key}}</h1>
+        {% for value in artist_dict[key] %}
+            <h5>{{value}}</h5>
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}

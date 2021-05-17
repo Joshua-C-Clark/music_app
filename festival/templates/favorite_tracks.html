@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Here is a collection of your favorite tracks, {{sp.me()['display_name']}}</h1>
+    <h1>Here is a collection of your favorite tracks, {{current_user.username}}</h1>
     {% for track in tracks %}
-        <h3>{{track}}</h3>
+        <h3>{{track[0]}}</h3>
     {% endfor %}
 
 {% endblock content %}

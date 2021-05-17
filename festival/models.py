@@ -18,3 +18,14 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}'"
+
+class Performers(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    artist_name = db.Column(db.String(100),nullable=False)
+    start_time = db.Column(db.Integer, nullable=False)
+    stop_time = db.Column(db.Integer, nullable=False)
+    length = db.Column(db.Integer,nullable=False)
+    stage_name = db.Column(db.String(100), nullable=False)
+
+    def __repr__(self):
+        return f"Performers('{self.artist_name}', '{self.start_time}', '{self.stop_time}', '{self.stage_name}'"
