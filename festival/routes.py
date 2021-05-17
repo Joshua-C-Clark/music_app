@@ -1,4 +1,3 @@
-from logging import log
 import os
 import spotipy
 from festival import app, db, bcrypt
@@ -6,8 +5,6 @@ from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from festival.models import User, Performers
 from festival.forms import RegistrationForm, LoginForm
-from secrets import token_hex
-from operator import itemgetter
 
 REDIRECT_URI = "http://localhost:5000/"
 SCOPE = 'playlist-modify-private,playlist-modify-public,user-top-read'

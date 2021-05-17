@@ -1,0 +1,10 @@
+sqlalchemy
+pandas
+numpy
+flask_login
+flask
+flask_sqlalchemy
+flask_bcrypt
+flask_wtf
+wtforms
+spotipy

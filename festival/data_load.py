@@ -1,7 +1,5 @@
 from sqlalchemy import create_engine
 import pandas as pd
-import sqlite3
-
 
 db_URI='sqlite:///C:\\Users\\jccla\Desktop\\Projects\\Portfolio\\music_app\\festival\\site.db'
 
