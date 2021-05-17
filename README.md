@@ -1,9 +1,7 @@
 # music_app
 <br>
-
 ## Overview
 A web application that integrates user login with Spotify API's for viewing favorite tracks and artists.
-
 
 ## Environment and Tools
 1. spotipy
